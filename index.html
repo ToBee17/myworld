@@ -30,14 +30,16 @@
       <a-plane position="0 -.5 -3.5" rotation="-90 0 0" width="40" height="20" color="#13201C" material="src: #dirt"></a-plane>
 
       <a-plane position="0 -.45 -1.3" rotation="-90 39 0" width="40" height="2" color="#B29B84" material="src: #chemin"></a-plane>
-
+      
       
       <a-entity
       light="type: point; intensity: 15; distance: 4; decay: 2; color: #F8D65A"
-      position=".5 2.8 -4.2"></a-entity>
+      position=".5 2.8 -4.2"
+      animation="property: light.intensity; from: 7; to: 15; dir:alternate; dur: 1000; easing: linear; loop: true"></a-entity>
       <a-entity
-      light="type: point; intensity: 15; distance: 4; decay: 2; color: #F8D65A"
-      position=".5 2.8 -5.5"></a-entity>
+      light="type: point; intensity: 25; distance: 4; decay: 2; color: #F8D65A"
+      position=".5 2.8 -5.5"
+      animation="property: light.intensity; to: 0; dur: 1000; easing: linear; loop: true"></a-entity>
       <a-sky color="#343948"></a-sky>
       <a-camera position=".3 .8 0"></a-camera>
 
