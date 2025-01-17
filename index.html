@@ -31,10 +31,10 @@
       ></a-entity>
 
       <a-entity
-      gltf-model="#bohnome" position="0 -.5 2" scale="0.5 0.5 0.5" rotation="0 130 0" anim="speed: 10"
+      gltf-model="#bohnome" position="0 .5 2" scale="0.5 0.5 0.5" rotation="0 130 0" anim="speed: 10"
       light="type: point; intensity: 0; distance: 10; decay: 2; color: #FFFFFF"
-      event-set__enter="_event: mouseenter; anim:speed: 0; light:intensity: 50; position: .3 -.65 .2"
-      event-set__leave="_event: mouseleave; anim:speed: 10; light:intensity: 0; position: 0 -.5 2"
+      event-set__enter="_event: mouseenter; anim:speed: 0; light:intensity: 50; position: .3 .15 .2"
+      event-set__leave="_event: mouseleave; anim:speed: 10; light:intensity: 0; position: 0 .5 2; rotation: 0 180 0"
       ></a-entity>
 
       <a-plane position="0 -.5 -3.5" rotation="-90 0 0" width="40" height="40" color="#13201C" material="src: #dirt"></a-plane>
@@ -55,7 +55,7 @@
       
       
       <a-entity id="rig">
-        <a-entity camera look-controls position=".3 .8 0">
+        <a-entity camera look-controls position=".3 1.6 0">
           <a-cursor raycaster></a-cursor>
         </a-entity>
       </a-entity>
