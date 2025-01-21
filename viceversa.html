@@ -4,6 +4,7 @@
   </head>
   <body>
     
+    <img id="sky" src="./assets2/fond.webp">
     <a-asset-item id="island" src="./assets2/Island.glb"></a-asset-item>  
     <a-asset-item id="islandL" src="./assets2/LargeIsland.glb"></a-asset-item>
     <a-asset-item id="islandM" src="./assets2/MediumIsland.glb"></a-asset-item>
@@ -12,6 +13,7 @@
     <a-asset-item id="ping" src="./assets2/Ping Pong table.glb"></a-asset-item>
     <a-asset-item id="volley" src="./assets2/Volleyball.glb"></a-asset-item>
     <a-asset-item id="mc" src="./assets2/water_monster_-_blockbench.glb"></a-asset-item>
+    <audio id="audio" src="./assets2/Bundle_of_Joy.mp3"></audio>
 
     
     <a-scene>
@@ -23,20 +25,23 @@
       gltf-model="#islandL" position="0 -4.7 -40" scale="7 2.5 7" rotation=""
       ></a-entity>
 
-      <a-entity gltf-model="#palme" position="2 -0 -40" scale="3 3 3" rotation="270 0 -30"></a-entity>
-      <a-entity gltf-model="#velo" position="0 -1.2 -42" scale="1.5 1.5 1.5" rotation="0 200 0"></a-entity>
-      <a-entity gltf-model="#ping" position="1.5 -1.2 -38" scale="2.5 2.5 2.5" rotation="0 -40 0"></a-entity>
-      <a-entity gltf-model="#volley" position="-2 -0.6 -37" scale=".12 .12 .12" rotation="30 30 0"></a-entity>
+      <a-entity gltf-model="#palme" position="1.65 -.8 -37" scale="3 3 3" rotation="270 30 20"></a-entity>
+      <a-entity gltf-model="#velo" position="-1.2 -1.2 -42" scale="1.5 1.5 1.5" rotation="0 210 0"></a-entity>
+      <a-entity gltf-model="#ping" position="1.5 -1.2 -39" scale="2.5 2.5 2.5" rotation="0 -40 0"></a-entity>
+      <a-entity gltf-model="#volley" position="-2 -0.6 -39" scale=".12 .12 .12" rotation="30 30 0"></a-entity>
       
       <a-entity
       gltf-model="#islandM" position="20 -4.7 -35" scale="5 2.5 5" rotation=""
       ></a-entity>
 
-
-      <a-entity id="camera" camera look-controls wasd-controls="" position="0 5 0">
-        <a-cursor raycaster></a-cursor>
+      <a-entity id="rig" position="0 2.5 -10">
+        <a-entity id="camera" camera look-controls wasd-controls="" position="0 1.6 0">
+          <a-cursor raycaster></a-cursor>
+        </a-entity>
       </a-entity>
+      <a-sky src="#sky" rotation="0 270 0"></a-sky>
       <a-entity gltf-model="#mc" position="0 0 5" scale=".1 .1 .1" rotation="180 0 180"></a-entity>
+      <a-sound src="#audio" autoplay="true" loop="true" volume="1"></a-sound>
 
 
     </a-scene>
