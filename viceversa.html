@@ -3,12 +3,42 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   </head>
   <body>
+    
+    <a-asset-item id="island" src="./assets2/Island.glb"></a-asset-item>  
+    <a-asset-item id="islandL" src="./assets2/LargeIsland.glb"></a-asset-item>
+    <a-asset-item id="islandM" src="./assets2/MediumIsland.glb"></a-asset-item>
+    <a-asset-item id="palme" src="./assets2/diving_fins_flippers.glb"></a-asset-item>
+    <a-asset-item id="velo" src="./assets2/Bicycle.glb"></a-asset-item>
+    <a-asset-item id="ping" src="./assets2/Ping Pong table.glb"></a-asset-item>
+    <a-asset-item id="volley" src="./assets2/Volleyball.glb"></a-asset-item>
+    <a-asset-item id="mc" src="./assets2/water_monster_-_blockbench.glb"></a-asset-item>
+
+    
     <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <a-entity
+      gltf-model="#island" position="-20 -4.7 -35" scale="10 5 10" rotation=""
+      ></a-entity>
+
+       <a-entity
+      gltf-model="#islandL" position="0 -4.7 -40" scale="7 2.5 7" rotation=""
+      ></a-entity>
+
+      <a-entity gltf-model="#palme" position="2 -0 -40" scale="3 3 3" rotation="270 0 -30"></a-entity>
+      <a-entity gltf-model="#velo" position="0 -1.2 -42" scale="1.5 1.5 1.5" rotation="0 200 0"></a-entity>
+      <a-entity gltf-model="#ping" position="1.5 -1.2 -38" scale="2.5 2.5 2.5" rotation="0 -40 0"></a-entity>
+      <a-entity gltf-model="#volley" position="-2 -0.6 -37" scale=".12 .12 .12" rotation="30 30 0"></a-entity>
+      
+      <a-entity
+      gltf-model="#islandM" position="20 -4.7 -35" scale="5 2.5 5" rotation=""
+      ></a-entity>
+
+
+      <a-entity id="camera" camera look-controls wasd-controls="" position="0 5 0">
+        <a-cursor raycaster></a-cursor>
+      </a-entity>
+      <a-entity gltf-model="#mc" position="0 0 5" scale=".1 .1 .1" rotation="180 0 180"></a-entity>
+
+
     </a-scene>
   </body>
 </html>
