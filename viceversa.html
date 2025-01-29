@@ -7,10 +7,12 @@
   <body>
     
     <audio id="audio" src="./assets2/Bundle_of_Joy.mp3" preload="auto"></audio>
+    <audio id="applause" src="./assets2/_021 - Child Applause.mp3"></audio>
     <img id="sky" src="./assets2/fondvice.png">
     <a-asset-item id="island" src="./assets2/Island.glb"></a-asset-item>  
     <a-asset-item id="islandL" src="./assets2/LargeIsland.glb"></a-asset-item>
     <a-asset-item id="islandM" src="./assets2/MediumIsland.glb"></a-asset-item>
+    <a-asset-item id="meuble" src="./assets2/Shelf.glb"></a-asset-item>
 
     <a-asset-item id="palme" src="./assets2/diving_fins_flippers.glb"></a-asset-item>
     <a-asset-item id="velo" src="./assets2/Bicycle.glb"></a-asset-item>
@@ -28,7 +30,7 @@
     <a-asset-item id="barbec" src="./assets2/barbec.glb"></a-asset-item>
     <a-asset-item id="tente" src="./assets2/tente.glb"></a-asset-item>
     <a-asset-item id="table" src="./assets2/table.glb"></a-asset-item>
-    <a-asset-item id="cars" src="./assets2/cars.glb"></a-asset-item>   
+    <a-asset-item id="cars" src="./assets2/cars.glb"></a-asset-item> 
 
     
     <a-scene vr-mode-ui="enabled: true" fog="type: linear; color: #FFE28B; far: 1000; near: 50" >
@@ -54,6 +56,70 @@
       gltf-model="#QG" position="0 2.5 5" scale="4 4 4" rotation="0 90 0" 
       ></a-entity>
 
+      <a-entity gltf-model="#meuble" position="8 5 5" scale="2 2 9.7" rotation="0 180 0"></a-entity>
+      <a-entity gltf-model="#meuble" position="-8 5 5" scale="2 2 9.7" rotation="0 180 0"></a-entity>
+
+      <a-entity id="spheres-container" visible="false"></a-entity>
+
+      <script>
+        const container = document.querySelector('#spheres-container');
+        const colors = ["#D02119", "#FFE28B", "#69C8E5", "#80BA46", "#A58BBA"];
+        const chances = [1, 6, 1, 1, 1]; // Probabilities for each color
+
+        function getRandomColor() {
+          const totalChances = chances.reduce((a, b) => a + b, 0);
+          const random = Math.floor(Math.random() * totalChances);
+          let sum = 0;
+
+          for (let i = 0; i < chances.length; i++) {
+        sum += chances[i];
+        if (random < sum) {
+          return colors[i];
+        }
+          }
+        }
+
+        for (let i = 0; i < 14; i++) {
+          const sphere = document.createElement('a-sphere');
+          sphere.setAttribute('radius', '0.3');
+          sphere.setAttribute('position', `8 4.1 ${i * 0.8 - 0.4}`);
+          const color = getRandomColor();
+          sphere.setAttribute('color', color);
+          sphere.setAttribute('material', `emissive: ${color}; emissiveIntensity: 1`);
+          container.appendChild(sphere);
+        }
+
+        for (let i = 1; i < 12; i++) {
+          const sphere = document.createElement('a-sphere');
+          sphere.setAttribute('radius', '0.3');
+          sphere.setAttribute('position', `8 4.9 ${i * 0.8}`);
+          const color = getRandomColor();
+          sphere.setAttribute('color', color);
+          sphere.setAttribute('material', `emissive: ${color}; emissiveIntensity: 1`);
+          container.appendChild(sphere);
+        }
+
+        for (let i = 1; i < 14; i++) {
+          const sphere = document.createElement('a-sphere');
+          sphere.setAttribute('radius', '0.3');
+          sphere.setAttribute('position', `-8 4.1 ${i * 0.8 - 0.4}`);
+          const color = getRandomColor();
+          sphere.setAttribute('color', color);
+          sphere.setAttribute('material', `emissive: ${color}; emissiveIntensity: 1`);
+          container.appendChild(sphere);
+        }
+
+        for (let i = 1; i < 12; i++) {
+          const sphere = document.createElement('a-sphere');
+          sphere.setAttribute('radius', '0.3');
+          sphere.setAttribute('position', `-8 4.9 ${i * 0.8}`);
+          const color = getRandomColor();
+          sphere.setAttribute('color', color);
+          sphere.setAttribute('material', `emissive: ${color}; emissiveIntensity: 1`);
+          container.appendChild(sphere);
+        }
+      </script>
+
       <a-cylinder height="520" radius=".25" position="0 -23 5" rotation="90 0 0"  color="#FDFBF7" 
       material="emissive: #FDFBF7; emissiveIntensity: 1; roughness: 0; metalness: 1;" opacity="1"></a-cylinder>
 
@@ -63,7 +129,7 @@
       <a-cylinder height="570" radius=".25" position="-15 -23 5" rotation="90 -37 0"  color="#FDFBF7" 
       material="emissive: #FDFBF7; emissiveIntensity: 1; roughness: 0; metalness: 1;" opacity="1"></a-cylinder>
 
-      <a-entity id="panneau" position="0 4.5 2.5">
+      <a-entity id="panneau" position="0 4.5 1.5">
         <a-plane width="4" height="2" color="#360F50" material="opacity: 0.9; transparent: true">
           <a-text value="Bienvenue au Quartier General des Emotions de Riley !
 
@@ -76,14 +142,17 @@
         </a-plane>
       </a-entity>
 
-      <a-sphere radius="0.5" position="0 3 -5" color="#FFFFFF" class="clickable" 
+      <a-sphere id="emotion" radius="0.5" position="0 3 -5" color="#FFFFFF" class="clickable" 
       event-set__click="_event: click; material.color: #FFFFFF">
       </a-sphere>
 
-      <a-sphere radius="0.5" position="0 3 1" color="#FFFFFF" class="clickable" 
-      event-set__click="_event: click; material.color: #FFFFFF">
-      </a-sphere>
+      <a-entity generate-orbs></a-entity>
 
+      <a-entity light="type: ambient; color: #BBB"></a-entity>
+      
+      <a-light type="directional" position="0 0 5" rotation="90 0 0" target="#directionaltarget" visible="true">
+        <a-entity id="directionaltarget" position="0 0 -1"></a-entity>
+      </a-light>
 
       <a-entity scale="10 10 10" position="20 -10 100">
         <a-entity
@@ -120,7 +189,7 @@
         <a-entity gltf-model="#game" position="20 -.1 -33" scale="1 1 1" rotation="0 0 0"></a-entity>
       </a-entity>
 
-      <a-entity id="rig" movement-controls="constrainToNavMesh: true;" position="0 2.7 5">
+      <a-entity id="rig" movement-controls="constrainToNavMesh: true;" position="0 2.7 5" dynamic-body>
         <a-entity camera look-controls="pointerLockEnabled: true" position="0 1.6 0"><a-cursor color="black" opacity="1" scale=".5 .5 .5"></a-cursor>
         </a-entity>
         <a-entity
@@ -133,13 +202,29 @@
         laser-controls="hand: right"
         raycaster="objects: .clickable; far: 10; showLine: true"
         ></a-entity>
+        <a-text
+            id="collected"
+            value="Orbes collectees:"
+            position="0 1 -1"
+            color="#FFF"
+            scale=".5 .5 .5"
+            align="center"
+      ></a-text>
+      <a-entity id="message" position="0 2 -3" visible="false">
+        <a-plane width="4" height="1" color="#360F50" material="opacity: 0.9; transparent: true">
+          <a-text value="Ouf merci pour ton aide ! Grace a toi le quartier general est range ! Profite en pour explorer les lieux." align="center" position="0 0 .05" width="3.5" color="white"></a-text>
+        </a-plane>
+        <a-plane id="bouton2" position="0 -1 -1" width="1" height="0.5" color="#008000" class="clickable">
+          <a-text value="Confirmer" align="center" position="0 0 .05" width="4" color="white"></a-text>
+        </a-plane>
+      </a-entity>
       </a-entity>
 
       <a-sky src="#sky" rotation="0 280 0"></a-sky>
       <a-entity gltf-model="#mc" position="0 0 5" scale=".1 .1 .1" rotation="180 0 180"></a-entity>
       <a-sound src="#audio" autoplay="true" loop="true" volume="3"></a-sound>
+      <a-sound src="#applause" volume=".5"></a-sound>
       
-
        <!-- Script JS -->
     <script>
       const emotionColors = ["#A58BBA", "#D02119", "#80BA46", "#69C8E5", "#FFE28B"];
@@ -151,7 +236,7 @@
         const scene = document.querySelector('a-scene');
         scene.setAttribute('fog', `type: linear; color: ${emotionColors[currentEmotionIndex]}; far: 1000; near: 50`);
       }
-      const sphere = document.querySelector('a-sphere');
+      const sphere = document.querySelector('#emotion');
       sphere.addEventListener('click', changeEmotion);
     </script>
   
@@ -160,6 +245,70 @@
         document.querySelector('#panneau').setAttribute('visible', 'false');
       });
     </script>
+
+<script>
+  document.querySelector('#bouton2').addEventListener('click', function() {
+    document.querySelector('#message').setAttribute('visible', 'false');
+    document.querySelector('#collected').setAttribute('visible', 'false');
+    document.querySelector('#spheres-container').setAttribute('visible', 'true');
+  });
+</script>
+
+<script>
+let collected = 0;
+const totalOrbs = 15;
+
+AFRAME.registerComponent('collectible', {
+  init: function () {
+    this.el.addEventListener('click', () => {
+      this.el.parentNode.removeChild(this.el); 
+      collectOrb();
+    });
+  }
+});
+
+function collectOrb() {
+  collected++;
+  console.log("Orbes collectees: " + collected); // Affiche le nombre d'orbes collectées pour le débogage
+  document
+    .querySelector("#collected")
+    .setAttribute("value", "Orbes collectees: " + collected);
+  
+  if (collected === totalOrbs) {
+    // Affiche le message quand toutes les orbes sont collectées
+    document.querySelector("#message").setAttribute("visible", "true");
+    document.querySelector("#applause").play(); 
+  }
+}
+
+AFRAME.registerComponent('generate-orbs', {
+  init: function () {
+    const scene = document.querySelector("a-scene");
+    const colors = ["#A58BBA", "#D02119", "#80BA46", "#69C8E5", "#FFE28B"];
+
+    for (let i = 0; i < totalOrbs; i++) {
+      const sphere = document.createElement("a-sphere");
+      let z = Math.random() * (13 - (-3)) + (-2);
+      let x = Math.random() * (7 - (-7)) + (-7);
+      let y = 3;
+      let color = colors[Math.floor(Math.random() * colors.length)];
+
+      sphere.setAttribute("position", `${x} ${y} ${z}`);
+      sphere.setAttribute("radius", ".3");
+      sphere.setAttribute("color", color);
+      sphere.setAttribute("material", `emissive: ${color}; emissiveIntensity: 1`);
+      sphere.setAttribute("class", "orb");
+      sphere.setAttribute("collectible", "");  // Ajoute la logique de suppression
+      sphere.setAttribute("dynamic-body", ""); // Active la physique pour collision
+      sphere.classList.add("collectible");
+      sphere.setAttribute("collect-item", "");
+
+      scene.appendChild(sphere);
+    }
+  }
+});
+</script>
+
     </a-scene>
     
   </body>
