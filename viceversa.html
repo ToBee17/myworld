@@ -31,7 +31,7 @@
     <a-asset-item id="cars" src="./assets2/cars.glb"></a-asset-item>   
 
     
-    <a-scene vr-mode-ui="enabled: true" fog="type: linear; color: #D02119; far: 1000; near: 50" >
+    <a-scene vr-mode-ui="enabled: true" fog="type: linear; color: #FFE28B; far: 1000; near: 50" >
 
       <a-assets>
         <a-asset-item id="navmesh" src="./assets2/QGV2PLAN.glb"></a-asset-item>
@@ -63,9 +63,26 @@
       <a-cylinder height="570" radius=".25" position="-15 -23 5" rotation="90 -37 0"  color="#FDFBF7" 
       material="emissive: #FDFBF7; emissiveIntensity: 1; roughness: 0; metalness: 1;" opacity="1"></a-cylinder>
 
+      <a-entity id="panneau" position="0 4.5 2.5">
+        <a-plane width="4" height="2" color="#360F50" material="opacity: 0.9; transparent: true">
+          <a-text value="Bienvenue au Quartier General des Emotions de Riley !
+
+          Joie, Tristesse, Degout, Peur et Colere ont eu une longue journee, et les orbes de souvenirs sont eparpillees partout ! Aide-les a tout ranger et a remettre de l’ordre dans l’esprit de Riley.
+          
+          Amuse-toi bien dans cette aventure immersive !" align="center" position="0 0 .05" width="3.5" color="white"></a-text>
+        </a-plane>
+        <a-plane id="bouton" position="0 -1 .5" width="1.7" height="0.5" color="#008000" class="clickable">
+          <a-text value="Je releve le defis" align="center" position="0 .05 .05" width="4" color="white"></a-text>
+        </a-plane>
+      </a-entity>
+
       <a-sphere radius="0.5" position="0 3 -5" color="#FFFFFF" class="clickable" 
       event-set__click="_event: click; material.color: #FFFFFF">
-</a-sphere>
+      </a-sphere>
+
+      <a-sphere radius="0.5" position="0 3 1" color="#FFFFFF" class="clickable" 
+      event-set__click="_event: click; material.color: #FFFFFF">
+      </a-sphere>
 
 
       <a-entity scale="10 10 10" position="20 -10 100">
@@ -103,7 +120,7 @@
         <a-entity gltf-model="#game" position="20 -.1 -33" scale="1 1 1" rotation="0 0 0"></a-entity>
       </a-entity>
 
-      <a-entity id="rig" movement-controls="constrainToNavMesh: true;" position="0 2.7 0">
+      <a-entity id="rig" movement-controls="constrainToNavMesh: true;" position="0 2.7 5">
         <a-entity camera look-controls="pointerLockEnabled: true" position="0 1.6 0"><a-cursor color="black" opacity="1" scale=".5 .5 .5"></a-cursor>
         </a-entity>
         <a-entity
@@ -124,25 +141,25 @@
       
 
        <!-- Script JS -->
-  <script>
-    // Liste des couleurs représentant les émotions
-    const emotionColors = ["#A58BBA", "#D02119", "#80BA46", "#69C8E5", "#FFE28B"];
-    let currentEmotionIndex = 0; // Index de la couleur actuelle
-
-    // Fonction pour changer l'émotion
-    function changeEmotion() {
-      // Incrémente l'index, revient à 0 si on dépasse la liste
-      currentEmotionIndex = (currentEmotionIndex + 1) % emotionColors.length;
-
-      // Change la couleur du fog
-      const scene = document.querySelector('a-scene');
-      scene.setAttribute('fog', `type: linear; color: ${emotionColors[currentEmotionIndex]}; far: 1000; near: 50`);
-    }
-
-    // Ajoute l'événement de clic sur la sphère
-    const sphere = document.querySelector('a-sphere');
-    sphere.addEventListener('click', changeEmotion);
-  </script>
+    <script>
+      const emotionColors = ["#A58BBA", "#D02119", "#80BA46", "#69C8E5", "#FFE28B"];
+      let currentEmotionIndex = 0;
+    
+      function changeEmotion() {
+        currentEmotionIndex = (currentEmotionIndex + 1) % emotionColors.length;
+      
+        const scene = document.querySelector('a-scene');
+        scene.setAttribute('fog', `type: linear; color: ${emotionColors[currentEmotionIndex]}; far: 1000; near: 50`);
+      }
+      const sphere = document.querySelector('a-sphere');
+      sphere.addEventListener('click', changeEmotion);
+    </script>
+  
+    <script>
+      document.querySelector('#bouton').addEventListener('click', function() {
+        document.querySelector('#panneau').setAttribute('visible', 'false');
+      });
+    </script>
     </a-scene>
     
   </body>
