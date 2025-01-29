@@ -250,7 +250,6 @@
   document.querySelector('#bouton2').addEventListener('click', function() {
     document.querySelector('#message').setAttribute('visible', 'false');
     document.querySelector('#collected').setAttribute('visible', 'false');
-    document.querySelector('#spheres-container').setAttribute('visible', 'true');
   });
 </script>
 
@@ -278,6 +277,7 @@ function collectOrb() {
     // Affiche le message quand toutes les orbes sont collectées
     document.querySelector("#message").setAttribute("visible", "true");
     document.querySelector("#applause").play(); 
+    document.querySelector('#spheres-container').setAttribute('visible', 'true');
   }
 }
 
