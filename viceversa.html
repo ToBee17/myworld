@@ -237,6 +237,8 @@
       <a-sound src="#audio" autoplay="true" loop="true" volume="3"></a-sound>
       <a-sound src="#applause" volume=".5"></a-sound>
       
+
+
        <!-- Script JS -->
     <script>
       const emotionColors = ["#A58BBA", "#D02119", "#80BA46", "#69C8E5", "#FFE28B"];
@@ -284,13 +286,12 @@ AFRAME.registerComponent('collectible', {
 
 function collectOrb() {
   collected++;
-  console.log("Orbes collectees: " + collected); // Affiche le nombre d'orbes collectées pour le débogage
+  console.log("Orbes collectees: " + collected);
   document
     .querySelector("#collected")
     .setAttribute("value", "Orbes collectees: " + collected);
   
   if (collected === totalOrbs) {
-    // Affiche le message quand toutes les orbes sont collectées
     document.querySelector("#message").setAttribute("visible", "true");
     document.querySelector("#applause").play(); 
     document.querySelector('#spheres-container').setAttribute('visible', 'true');
@@ -314,8 +315,8 @@ AFRAME.registerComponent('generate-orbs', {
       sphere.setAttribute("color", color);
       sphere.setAttribute("material", `emissive: ${color}; emissiveIntensity: 1`);
       sphere.setAttribute("class", "orb");
-      sphere.setAttribute("collectible", "");  // Ajoute la logique de suppression
-      sphere.setAttribute("dynamic-body", ""); // Active la physique pour collision
+      sphere.setAttribute("collectible", "");
+      sphere.setAttribute("dynamic-body", "");
       sphere.classList.add("collectible");
       sphere.setAttribute("collect-item", "");
 
