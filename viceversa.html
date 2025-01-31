@@ -133,7 +133,7 @@
         <a-plane width="4" height="2" color="#360F50" material="opacity: 0.9; transparent: true">
           <a-text value="Bienvenue au Quartier General des Emotions de Riley !
 
-          Joie, Tristesse, Degout, Peur et Colere ont eu une longue journee, et les orbes de souvenirs sont eparpillees partout ! Aide-les a tout ranger et a remettre de l’ordre dans l’esprit de Riley.
+          Joie, Tristesse, Degout, Peur et Colere ont eu une longue journee. Aide-les a ranger toutes les orbes.
           
           Amuse-toi bien dans cette aventure immersive !" align="center" position="0 0 .05" width="3.5" color="white"></a-text>
         </a-plane>
@@ -142,9 +142,19 @@
         </a-plane>
       </a-entity>
 
-      <a-sphere id="emotion" radius="0.5" position="0 3 -5" color="#FFFFFF" class="clickable" 
-      event-set__click="_event: click; material.color: #FFFFFF">
-      </a-sphere>
+      <a-entity id="v2" visible="false">
+        <a-sphere id="emotion" radius="0.3" position="0 3.4 -4" color="#FFFFFF" class="clickable" 
+        event-set__click="_event: click; material.color: #FFFFFF" material="emissive: #FDFBF7; emissiveIntensity: 1">
+        </a-sphere>
+
+        <a-box width="1" height="1" depth="1" color="#895D9C" position="0 3 -4"></a-box>
+
+        <a-entity id="indication" position="0 4.1 -4">
+          <a-plane width="4" height=".6" color="#360F50" material="opacity: 0.5; transparent: true">
+            <a-text value="Tu peux changer les humeurs de Riley via ce bouton." align="center" position="0 .025 .05" width="3.  5"  color="white"></a-text>
+          </a-plane>
+        </a-entity>
+      </a-entity>
 
       <a-entity generate-orbs></a-entity>
 
@@ -191,6 +201,15 @@
 
       <a-entity id="rig" movement-controls="constrainToNavMesh: true;" position="0 2.7 5" dynamic-body>
         <a-entity camera look-controls="pointerLockEnabled: true" position="0 1.6 0"><a-cursor color="black" opacity="1" scale=".5 .5 .5"></a-cursor>
+          <a-text
+            id="collected"
+            visible="false"
+            value="Orbes collectees:"
+            position="0 .8 -2"
+            color="#FFF"
+            scale=".5 .5 .5"
+            align="center"
+      ></a-text>
         </a-entity>
         <a-entity
         oculus-touch-controls="hand: left"
@@ -202,14 +221,7 @@
         laser-controls="hand: right"
         raycaster="objects: .clickable; far: 10; showLine: true"
         ></a-entity>
-        <a-text
-            id="collected"
-            value="Orbes collectees:"
-            position="0 1 -1"
-            color="#FFF"
-            scale=".5 .5 .5"
-            align="center"
-      ></a-text>
+        
       <a-entity id="message" position="0 2 -3" visible="false">
         <a-plane width="4" height="1" color="#360F50" material="opacity: 0.9; transparent: true">
           <a-text value="Ouf merci pour ton aide ! Grace a toi le quartier general est range ! Profite en pour explorer les lieux." align="center" position="0 0 .05" width="3.5" color="white"></a-text>
@@ -235,6 +247,7 @@
       
         const scene = document.querySelector('a-scene');
         scene.setAttribute('fog', `type: linear; color: ${emotionColors[currentEmotionIndex]}; far: 1000; near: 50`);
+        document.querySelector('#indication').setAttribute('visible', 'false');
       }
       const sphere = document.querySelector('#emotion');
       sphere.addEventListener('click', changeEmotion);
@@ -243,6 +256,7 @@
     <script>
       document.querySelector('#bouton').addEventListener('click', function() {
         document.querySelector('#panneau').setAttribute('visible', 'false');
+        document.querySelector('#collected').setAttribute('visible', 'true');        
       });
     </script>
 
@@ -250,6 +264,8 @@
   document.querySelector('#bouton2').addEventListener('click', function() {
     document.querySelector('#message').setAttribute('visible', 'false');
     document.querySelector('#collected').setAttribute('visible', 'false');
+    document.querySelector('#v2').setAttribute('visible', 'true');
+    
   });
 </script>
 
